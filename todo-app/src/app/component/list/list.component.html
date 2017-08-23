@@ -1,0 +1,9 @@
+<div>
+    <ul>
+        <li *ngFor="let list of data; let id=index">
+          <input type="checkbox" class="checkbox" [(ngModel)]="list.completed" />
+          <span [ngClass]="{'checked': list.completed}">{{ list.data }}</span>
+         <span> <i (click)="deleteTodo(id)" class="fa fa-trash"></i></span>
+        </li>
+      </ul>
+</div>

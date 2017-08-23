@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ListService } from './service/list/list.service'
 
 @Component({
   selector: 'app-root',
@@ -10,27 +11,17 @@ export class AppComponent {
   newList: string;
   todos: any;
   todoObj: any;
+  list: any;
 
-  constructor(){
+  constructor(private listService: ListService){
      this.newList = '';
      this.todos = [];
   }
-
-  addTodo(event){
-    // console.log("add list");
-    this.todoObj = {
-      newList: this.newList,
-      completed: false
-    }
-    this.todos.push(this.todoObj);
-    this.newList = '';
-    //event.preventDefault();
-    console.log(this.todos);
-    console.log(this.todoObj);
-  }
-
-  deleteTodo(index) {
-    this.todos.splice(index, 1);
+  
+  newItemlistener(data){
+    this.listService.addTodo(data);
+    this.list = this.listService.getTodo();
+    //console.log(this.todos);
   }
 
 }
