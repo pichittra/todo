@@ -1,4 +1,4 @@
-import { Component, OnInit , Input } from '@angular/core';
+import { Component, OnInit , Input , Output ,EventEmitter } from '@angular/core';
 import { ListService } from '../../service/list/list.service';
 @Component({
   selector: 'app-list',
@@ -7,12 +7,18 @@ import { ListService } from '../../service/list/list.service';
 })
 export class ListComponent implements OnInit {
   @Input() data;
+  @Output() delData = new EventEmitter ();
+  @Output() checkData = new EventEmitter ();
   constructor(private listService : ListService) {
-    console.log(this.data);
    }
 
   ngOnInit() {
-    
   }
-
+  deleteData(id){
+    this.delData.emit(id);
+  }
+  check(id){
+    this.checkData.emit(id);
+  }
+  
 }

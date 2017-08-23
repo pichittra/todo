@@ -23,5 +23,13 @@ export class AppComponent {
     this.list = this.listService.getTodo();
     //console.log(this.todos);
   }
+  deleteData(id){
+    this.listService.deleteTodo(id);
+    this.list = this.listService.getTodo();
+  }
+  checkData(id){
+    this.listService.check(id);
+    this.list = this.listService.getTodo();
+  }
 
 }

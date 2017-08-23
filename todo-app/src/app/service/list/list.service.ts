@@ -8,6 +8,8 @@ export class ListService {
   todos: any;
   todoObj: any;
   data: string;
+  id: any;
+  count=0;
 
   constructor() {
     this.newList = '';
@@ -17,17 +19,26 @@ export class ListService {
    addTodo(data){
      
     this.todoObj = {
+      id: this.count++,
       data: data,
       completed: false
     }
     this.todos.push(this.todoObj);
     this.data = '';
   }
-
-  deleteTodo(index) {
-    this.todos.splice(index, 1);
+  deleteTodo(list) {
+     this.todos = this.todos.filter(function(item){
+        return item.id != list.id;
+     });
+  }
+  checkCompleteData(item) {
+    console.log(item);
+    return item.completed == false;
   }
   getTodo(){
-    return this.todos;
+     return this.todos.filter(this.checkCompleteData);
+  }
+  check(list) {
+    this.todos[list.id].completed = true;
   }
 }
