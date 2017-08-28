@@ -32,13 +32,18 @@ export class ListService {
      });
   }
   checkCompleteData(item) {
-    console.log(item);
     return item.completed == false;
   }
   getTodo(){
      return this.todos.filter(this.checkCompleteData);
   }
   check(list) {
-    this.todos[list.id].completed = true;
+
+    for(let i=0;i<this.todos.length;i++){
+      if(this.todos[i].id == list.id){
+        this.todos[i].completed = true;
+      }
+    }
+
   }
 }

@@ -14,11 +14,11 @@ export class ListComponent implements OnInit {
 
   ngOnInit() {
   }
-  deleteData(id){
-    this.delData.emit(id);
+  deleteData(list){
+    this.delData.emit(list);
   }
-  check(id){
-    this.checkData.emit(id);
+  check(list){
+    this.checkData.emit(list);
   }
   
 }
