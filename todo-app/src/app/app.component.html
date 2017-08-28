@@ -1,12 +1,22 @@
-<header>
+<!-- <header>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <h1>Todo</h1>
 </header>
 
 <app-new-list (updateData)="newItemlistener($event)"></app-new-list>
-<app-list [data]="list" (delData)="deleteData($event)" (checkData)="checkData($event)"></app-list>
+<app-list [data]="list" (delData)="deleteData($event)" (checkData)="checkData($event)"></app-list> -->
 
-<div class="container">
-  <router-outlet></router-outlet>
+<div class="container">  
+    <!-- <md-tab label="One">
+        <h1>one</h1>
+    </md-tab>
+    <md-tab label="Two">
+        <h1>Two</h1>
+    </md-tab>
+    aaaaaaaaaa -->
+  <router-outlet>
+     
+  </router-outlet>
 </div>
+<!-- <p>5555555555555555555</p> -->
 <!-- <router-link :to="{ path: '/history'}" ></router-link> -->

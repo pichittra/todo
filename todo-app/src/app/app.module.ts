@@ -7,18 +7,21 @@ import { ListComponent } from './component/list/list.component';
 import { ListService } from './service/list/list.service';
 import { HistoryComponent } from './component/history/history.component';
 import { AppRoutingModule } from './app-routing.module';
+import { MainComponent } from './component/main/main.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NewListComponent,
     ListComponent,
-    HistoryComponent
+    HistoryComponent,
+    MainComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    
   ],
   providers: [
     ListService

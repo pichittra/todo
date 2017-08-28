@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ListService } from '../../service/list/list.service'
 
 @Component({
   selector: 'app-history',
@@ -7,10 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HistoryComponent implements OnInit {
 
-  constructor() { }
+  constructor(private listService: ListService) { }
 
+  list: any;
   ngOnInit() {
     console.log("history!!")
+    this.list = this.listService.getTodoComplete();
+    console.log(this.list);
   }
 
 }

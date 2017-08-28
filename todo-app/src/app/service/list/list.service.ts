@@ -34,9 +34,16 @@ export class ListService {
   checkCompleteData(item) {
     return item.completed == false;
   }
+  checkCompleteDataFinish(item) {
+    return item.completed == true;
+  }
   getTodo(){
      return this.todos.filter(this.checkCompleteData);
   }
+  getTodoComplete(){
+    //console.log(this.todos);
+    return this.todos.filter(this.checkCompleteDataFinish);
+ }
   check(list) {
 
     for(let i=0;i<this.todos.length;i++){
