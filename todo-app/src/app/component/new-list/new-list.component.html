@@ -3,6 +3,10 @@
     <form>
       <input [(ngModel)]="data" class="textfield" name="data">
       <button (click)="addTodo()">Add Todo</button>
+      <button (click)="goHistory()">History</button>
+      <a [routerLink]="['/history']" >
+        link to history
+      </a>
     </form>
   </div>
 </div>
