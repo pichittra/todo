@@ -8,23 +8,19 @@ export class ListService {
 
   title = 'Todo';
   newList: string;
-  todos: any;
+  todos: any=[];
   todoObj: any;
   data: string;
   id: any;
   count = 0;
 
-  //  BehaviourSubject = new BehaviorSubject(initialState);
   private _todos: BehaviorSubject<any> = new BehaviorSubject(this.todos);
   public readonly todos2: Observable<any> = this._todos.asObservable();
 
   constructor() {
     this.newList = '';
     this.todos = [];
-    //this.loadInitialData();
   }
-
-
   addTodo(data) {
 
     this.todoObj = {
@@ -41,25 +37,17 @@ export class ListService {
     this.todos = this.todos.filter(function (item) {
       return item.id != list.id;
     });
-  }
-  checkCompleteData(item) {
-    return item.completed == false;
+    this._todos.next(this.todos);
   }
   checkCompleteDataFinish(item) {
     return item.completed == true;
   }
-  // getTodo(){
-  //    return this.todos.filter(this.checkCompleteData);
-  // }
-  getTodo(): Observable<any> {
-    return this.todos.filter(this.checkCompleteData).
-      map((data) => {
-        return data;
-      });
-  }
-  getTodoComplete() {
-    //console.log(this.todos);
-    return this.todos.filter(this.checkCompleteDataFinish);
+
+  getTodoComplete() : Observable<any> {
+    return this.todos.filter(this.checkCompleteDataFinish).
+    map((data) => {
+      return data;
+    });
   }
   check(list) {
 
@@ -68,6 +56,15 @@ export class ListService {
         this.todos[i].completed = true;
       }
     }
+    this._todos.next(this.todos);
 
+  }
+
+  filterData():Observable<any>{
+    return this.todos2.map(res => {
+       return res.filter(item => {
+         return !item.completed
+        });
+    });
   }
 }

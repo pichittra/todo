@@ -26,19 +26,20 @@ export class MainComponent implements OnInit {
   }
   newItemlistener(data) {
     this.listService.addTodo(data);
-    this.list = this.listService.getTodo();
-  
   }
   deleteData(data) {
     this.listService.deleteTodo(data);
-    this.list = this.listService.getTodo();
+  
+   // this.list = this.listService.getTodo();
+    // this.listService.todos2.subscribe(res => {
+    //   this.list = res;
+    // });
   }
   checkData(data) {
     this.listService.check(data);
-    this.list = this.listService.getTodo();
   }
   ngOnInit() {
-    this.listService.todos2.subscribe(res => {
+    this.listService.filterData().subscribe(res => {
       this.list = res;
     });
 

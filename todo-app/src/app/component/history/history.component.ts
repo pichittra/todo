@@ -13,8 +13,10 @@ export class HistoryComponent implements OnInit {
   list: any;
   ngOnInit() {
     console.log("history!!")
-    this.list = this.listService.getTodoComplete();
-    console.log(this.list);
+    this.list = this.listService.getTodoComplete(); 
+    // this.listService.getTodoComplete().subscribe(res => {
+    //   this.list = res;
+    // });
   }
 
 }
