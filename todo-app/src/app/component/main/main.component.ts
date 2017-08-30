@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ListService } from '../../service/list/list.service'
 import { RouterModule, Routes, Route, Router, RouterLink, ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs/Rx';
 
 @Component({
   selector: 'app-main',
@@ -11,15 +12,14 @@ export class MainComponent implements OnInit {
 
   title = 'Todo';
   newList: string;
-  todos: any;
-  todoObj: any;
+ // todos: any;
+ // todoObj: any;
   list: any;
 
   constructor(private listService: ListService,
     private router: Router,
     private route: ActivatedRoute) {
     this.newList = '';
-    this.todos = [];
   }
   goHistory() {
     this.router.navigate(['/history']);
@@ -27,7 +27,7 @@ export class MainComponent implements OnInit {
   newItemlistener(data) {
     this.listService.addTodo(data);
     this.list = this.listService.getTodo();
-    //console.log(this.todos);
+  
   }
   deleteData(data) {
     this.listService.deleteTodo(data);
@@ -38,7 +38,10 @@ export class MainComponent implements OnInit {
     this.list = this.listService.getTodo();
   }
   ngOnInit() {
-    this.list = this.listService.getTodo();
+    this.listService.todos2.subscribe(res => {
+      this.list = res;
+    });
+
   }
 
 }
