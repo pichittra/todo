@@ -1,56 +1,70 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import { BehaviorSubject } from "rxjs/Rx";
+
 
 @Injectable()
 export class ListService {
-  
+
   title = 'Todo';
   newList: string;
-  todos: any;
+  todos: any=[];
   todoObj: any;
   data: string;
   id: any;
-  count=0;
+  count = 0;
+
+  private _todos: BehaviorSubject<any> = new BehaviorSubject(this.todos);
+  public readonly todos2: Observable<any> = this._todos.asObservable();
 
   constructor() {
     this.newList = '';
     this.todos = [];
-   }
+  }
+  addTodo(data) {
 
-   addTodo(data){
-     
     this.todoObj = {
       id: this.count++,
       data: data,
       completed: false
     }
     this.todos.push(this.todoObj);
-    this.data = '';
+    this._todos.next(this.todos);
+
   }
+
   deleteTodo(list) {
-     this.todos = this.todos.filter(function(item){
-        return item.id != list.id;
-     });
-  }
-  checkCompleteData(item) {
-    return item.completed == false;
+    this.todos = this.todos.filter(function (item) {
+      return item.id != list.id;
+    });
+    this._todos.next(this.todos);
   }
   checkCompleteDataFinish(item) {
     return item.completed == true;
   }
-  getTodo(){
-     return this.todos.filter(this.checkCompleteData);
+
+  getTodoComplete() : Observable<any> {
+    return this.todos.filter(this.checkCompleteDataFinish).
+    map((data) => {
+      return data;
+    });
   }
-  getTodoComplete(){
-    //console.log(this.todos);
-    return this.todos.filter(this.checkCompleteDataFinish);
- }
   check(list) {
 
-    for(let i=0;i<this.todos.length;i++){
-      if(this.todos[i].id == list.id){
+    for (let i = 0; i < this.todos.length; i++) {
+      if (this.todos[i].id == list.id) {
         this.todos[i].completed = true;
       }
     }
+    this._todos.next(this.todos);
 
+  }
+
+  filterData():Observable<any>{
+    return this.todos2.map(res => {
+       return res.filter(item => {
+         return !item.completed
+        });
+    });
   }
 }
