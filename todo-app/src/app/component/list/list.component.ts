@@ -1,5 +1,6 @@
 import { Component, OnInit , Input , Output ,EventEmitter } from '@angular/core';
 import { ListService } from '../../service/list/list.service';
+import { RouterModule, Router} from '@angular/router';
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
@@ -9,7 +10,8 @@ export class ListComponent implements OnInit {
   @Input() data;
   @Output() delData = new EventEmitter ();
   @Output() checkData = new EventEmitter ();
-  constructor(private listService : ListService) {
+  constructor(private listService : ListService ,
+    private router: Router) {
    }
 
   ngOnInit() {
@@ -19,6 +21,9 @@ export class ListComponent implements OnInit {
   }
   check(list){
     this.checkData.emit(list);
+  }
+  addSubTask(list){
+    this.router.navigate([`/subTask/${list.id}/`]);
   }
   
 }

@@ -8,6 +8,7 @@ import { ListService } from './service/list/list.service';
 import { HistoryComponent } from './component/history/history.component';
 import { AppRoutingModule } from './app-routing.module';
 import { MainComponent } from './component/main/main.component';
+import { SubTaskComponent } from './component/sub-task/sub-task.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { MainComponent } from './component/main/main.component';
     NewListComponent,
     ListComponent,
     HistoryComponent,
-    MainComponent
+    MainComponent,
+    SubTaskComponent
   ],
   imports: [
     BrowserModule,

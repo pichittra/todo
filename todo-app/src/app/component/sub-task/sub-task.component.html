@@ -1,0 +1,8 @@
+<form (ngSubmit)="addSubTask()">
+<p *ngIf="task">
+  {{task.data}}
+  <label for="task.detail">Detail : </label>
+  <input name="task.detail" class="form-control" [(ngModel)]="task.detail" required >
+  <button type="submit" >Save</button>
+</p>
+</form>

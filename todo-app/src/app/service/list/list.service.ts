@@ -8,7 +8,7 @@ export class ListService {
 
   title = 'Todo';
   newList: string;
-  todos: any=[];
+  todos: any = [];
   todoObj: any;
   data: string;
   id: any;
@@ -43,11 +43,11 @@ export class ListService {
     return item.completed == true;
   }
 
-  getTodoComplete() : Observable<any> {
+  getTodoComplete(): Observable<any> {
     return this.todos.filter(this.checkCompleteDataFinish).
-    map((data) => {
-      return data;
-    });
+      map((data) => {
+        return data;
+      });
   }
   check(list) {
 
@@ -60,11 +60,36 @@ export class ListService {
 
   }
 
-  filterData():Observable<any>{
+  filterData(): Observable<any> {
     return this.todos2.map(res => {
-       return res.filter(item => {
-         return !item.completed
-        });
+      return res.filter(item => {
+        return !item.completed
+      });
     });
+  }
+
+  getTask(id): Observable<any> {
+
+    return this.todos2.map(res => {
+      return res.find(item => {
+        return item.id == id
+      });
+    });
+  }
+  addSubTask(detail) {
+    let addDetail = this.todos2.map(function (item) {
+      if(item.id == this.todoObj.id){
+        this.todoObj = {
+          id: item.id,
+          data: item.data,
+          detail: detail,
+          completed: item.completed
+        }
+        return this.todoObj;
+      }
+      this.todos.push(item);
+      console.log(item);
+    return item;
+    })
   }
 }
