@@ -40,13 +40,18 @@ export class MainComponent implements OnInit {
       for (let i = 0; i < this.list.length; i++) {
         if(this.list[i].id == data.id){
           this.list[i] = res
-        }
+        }  
     }
    });
   }
   ngOnInit() {
     this.manageService.getTodo().subscribe(res=> {
       this.list = res;
+    })
+  }
+  filterData(){
+    return this.list.filter(item => {
+      return !item.completed
     })
   }
 }

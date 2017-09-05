@@ -24,7 +24,7 @@ export class ManageService {
   addTodo(data): Observable<any> {
     console.log(data)
     return this.http.post
-      (`http://localhost:3000/todos/`, { todo: data })
+      (`http://localhost:3000/todos/`, { todo: data , completed: false })
       .map((res: Response) => res.json());
   }
   getSubTask(id): Observable<any> {
@@ -36,7 +36,7 @@ export class ManageService {
   editTodo(data): Observable<any> {
     console.log(data)
     return this.http.put
-      (`http://localhost:3000/todos/${data.id}`, { todo: data.todo, detail: data.detail })
+      (`http://localhost:3000/todos/${data.id}`, data)
       .map((res: Response) => res.json());
   }
   check(list) {
