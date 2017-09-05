@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from "rxjs/Rx";
-
+import { Http, Response } from '@angular/http';
 
 @Injectable()
 export class ListService {
@@ -17,20 +17,32 @@ export class ListService {
   private _todos: BehaviorSubject<any> = new BehaviorSubject(this.todos);
   public readonly todos2: Observable<any> = this._todos.asObservable();
 
-  constructor() {
+  constructor(private http: Http) {
     this.newList = '';
     this.todos = [];
   }
-  addTodo(data) {
+  // addTodo(data) {
 
-    this.todoObj = {
-      id: this.count++,
-      data: data,
-      completed: false
-    }
-    this.todos.push(this.todoObj);
-    this._todos.next(this.todos);
+  //   this.todoObj = {
+  //     id: this.count++,
+  //     data: data,
+  //     completed: false
+  //   }
+  //   this.todos.push(this.todoObj);
+  //   this._todos.next(this.todos);
 
+  // }
+  // filterData(): Observable<any>{
+  //   return this.http.get
+  //   (`http://59acbb43fab63d001105fcd6.mockapi.io/api/v1/users/1/todos`)
+  //   .map((res : Response) => res.json());
+
+  // }
+  addTodo(data) : Observable<any> {
+    console.log(data)
+   return this.http.post
+      (`http://59acbb43fab63d001105fcd6.mockapi.io/api/v1/users/1/todos/`,{todo: data})
+      .map((res: Response) => res.json());
   }
 
   deleteTodo(list) {
@@ -60,25 +72,37 @@ export class ListService {
 
   }
 
+  // filterData(): Observable<any> {
+  //   return this.todos2.map(res => {
+  //     return res.filter(item => {
+  //       return !item.completed
+  //     });
+  //   });
+  // }
   filterData(): Observable<any> {
-    return this.todos2.map(res => {
-      return res.filter(item => {
-        return !item.completed
-      });
-    });
+    return this.http.get
+      (`http://59acbb43fab63d001105fcd6.mockapi.io/api/v1/users/1/todos`)
+      .map((res: Response) => res.json());
+
   }
 
+  // getTask(id): Observable<any> {
+
+  //   return this.todos2.map(res => {
+  //     return res.find(item => {
+  //       return item.id == id
+  //     });
+  //   });
+  // }
   getTask(id): Observable<any> {
-
-    return this.todos2.map(res => {
-      return res.find(item => {
-        return item.id == id
-      });
-    });
+    return this.http.get
+      (`http://59acbb43fab63d001105fcd6.mockapi.io/api/v1/users/1/todos/${id}`)
+      .map((res: Response) => res.json());
   }
+
   addSubTask(detail) {
     let addDetail = this.todos2.map(function (item) {
-      if(item.id == this.todoObj.id){
+      if (item.id == this.todoObj.id) {
         this.todoObj = {
           id: item.id,
           data: item.data,
@@ -89,7 +113,7 @@ export class ListService {
       }
       this.todos.push(item);
       console.log(item);
-    return item;
+      return item;
     })
   }
 }
