@@ -42,7 +42,7 @@ export class ManageService {
   check(list) {
     return this.http.put
       (`http://localhost:3000/todos/${list.id}`,
-      { todo: list.todo, detail: list.detail ,completed: true })
+      { todo: list.todo, detail: list.detail, completed: true })
       .map((res: Response) => res.json());
   }
   getTodoComplete(): Observable<any> {
@@ -53,4 +53,9 @@ export class ManageService {
           return item.completed == true
         }));
   }
+  deleteTodo(list) {
+    return this.http.delete(`http://localhost:3000/todos/${list.id}`)
+      .map((res: Response) => res.json())
+  }
+
 }

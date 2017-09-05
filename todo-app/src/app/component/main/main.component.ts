@@ -29,7 +29,11 @@ export class MainComponent implements OnInit {
    });
   }
   deleteData(data) {
-    this.listService.deleteTodo(data);
+    this.manageService.deleteTodo(data).subscribe(res => {
+       this.list = this.list.filter(function (item) {
+      return item.id != data.id;
+    })
+   });
   }
   checkData(data) {
     this.manageService.check(data).subscribe(res => {

@@ -14,8 +14,6 @@ export class HistoryComponent implements OnInit {
 
   list: any;
   ngOnInit() {
-    console.log("history!!")
-   // this.list = this.listService.getTodoComplete();
     this.manageService.getTodoComplete().subscribe(res => {
       this.list = res;
       console.log(this.list)
