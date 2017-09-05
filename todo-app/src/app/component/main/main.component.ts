@@ -13,7 +13,7 @@ export class MainComponent implements OnInit {
 
   title = 'Todo';
   newList: string;
-  list: any;
+  list: any=[];
 
   constructor(private listService: ListService,
     private manageService: ManageService,
@@ -39,15 +39,10 @@ export class MainComponent implements OnInit {
         }
     }
    });
-
-  }
-  newSubTask(data){
-    console.log(data)
   }
   ngOnInit() {
     this.manageService.getTodo().subscribe(res=> {
       this.list = res;
     })
   }
-
 }

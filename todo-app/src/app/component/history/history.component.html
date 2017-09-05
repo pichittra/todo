@@ -1,11 +1,11 @@
 <div>
-    
-           <div *ngFor="let list of list; let id=index">{{id+1}}
-             <input type="checkbox" class="checkbox" [(ngModel)]="list.completed" />
-             <span [ngClass]="{'checked': list.completed}">{{ list.data }}</span>
-            <span> <i (click)="deleteData(list)" class="fa fa-trash"></i></span>
-            <span><i class="fa fa-check-square-o" (click)="check(list)"></i></span>
-           </div>
-      
-   </div> 
-   
+  <div *ngFor="let list of list; let id=index">{{id+1}}
+    <ul>
+      <input type="checkbox" class="checkbox" [(ngModel)]="list.completed" />
+      <span [ngClass]="{'checked': list.completed}">{{ list.todo }}</span>
+      <span> <i (click)="deleteData(list)" class="fa fa-trash"></i></span>
+      <span><i class="fa fa-check-square-o" (click)="check(list)"></i></span>
+      <li> {{list.detail}} </li>
+    </ul>
+  </div>
+</div>

@@ -31,13 +31,6 @@ export class ListService {
   //   this.todos.push(this.todoObj);
   //   this._todos.next(this.todos);
 
-  // }
-  // filterData(): Observable<any>{
-  //   return this.http.get
-  //   (`http://59acbb43fab63d001105fcd6.mockapi.io/api/v1/users/1/todos`)
-  //   .map((res : Response) => res.json());
-
-  // }
   addTodo(data) : Observable<any> {
     console.log(data)
    return this.http.post
@@ -86,14 +79,6 @@ export class ListService {
 
   }
 
-  // getTask(id): Observable<any> {
-
-  //   return this.todos2.map(res => {
-  //     return res.find(item => {
-  //       return item.id == id
-  //     });
-  //   });
-  // }
   getTask(id): Observable<any> {
     return this.http.get
       (`http://59acbb43fab63d001105fcd6.mockapi.io/api/v1/users/1/todos/${id}`)

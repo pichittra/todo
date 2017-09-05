@@ -29,14 +29,8 @@ export class SubTaskComponent implements OnInit {
   editTodo(task){
         this.manageService.editTodo(task).subscribe(res=> {
           this.task = res;
+          this._location.back();
         });
-    this._location.back();
-
   }
-  // addSubTask() {
-  //   this.listService.addSubTask(this.task);
-  //   //this.router.navigate['../'];
-  //   this._location.back();
-  // }
 
 }

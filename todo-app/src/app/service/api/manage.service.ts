@@ -15,7 +15,7 @@ export class ManageService {
   // }
   getTodo(): Observable<any> {
     return this.http.get
-      (`http://59acbb43fab63d001105fcd6.mockapi.io/api/v1/users/1/todos`)
+      (`http://localhost:3000/todos`)
       .map((res: Response) => res.json()
         .filter(item => {
           return !item.completed
@@ -24,25 +24,33 @@ export class ManageService {
   addTodo(data): Observable<any> {
     console.log(data)
     return this.http.post
-      (`http://59acbb43fab63d001105fcd6.mockapi.io/api/v1/users/1/todos/`, { todo: data })
+      (`http://localhost:3000/todos/`, { todo: data })
       .map((res: Response) => res.json());
   }
   getSubTask(id): Observable<any> {
     return this.http.get
-      (`http://59acbb43fab63d001105fcd6.mockapi.io/api/v1/users/1/todos/${id}`)
+      (`http://localhost:3000/todos/${id}`)
       .map((res: Response) => res.json());
   }
 
   editTodo(data): Observable<any> {
     console.log(data)
     return this.http.put
-      (`http://59acbb43fab63d001105fcd6.mockapi.io/api/v1/users/1/todos/${data.id}`, { todo: data.todo, detail: data.detail })
+      (`http://localhost:3000/todos/${data.id}`, { todo: data.todo, detail: data.detail })
       .map((res: Response) => res.json());
   }
   check(list) {
     return this.http.put
-      (`http://59acbb43fab63d001105fcd6.mockapi.io/api/v1/users/1/todos/${list.id}`,
-      { completed: true })
+      (`http://localhost:3000/todos/${list.id}`,
+      { todo: list.todo, detail: list.detail ,completed: true })
       .map((res: Response) => res.json());
+  }
+  getTodoComplete(): Observable<any> {
+    return this.http.get
+      (`http://localhost:3000/todos`)
+      .map((res: Response) => res.json()
+        .filter(item => {
+          return item.completed == true
+        }));
   }
 }
