@@ -1,6 +1,8 @@
-<form (ngSubmit)="addSubTask()">
+<form (ngSubmit)="editTodo(task)">
 <p *ngIf="task">
   {{task.data}}
+  <label for="task.detail">Task : </label>
+  <input name="task.todo" class="form-control" [(ngModel)]="task.todo" required >
   <label for="task.detail">Detail : </label>
   <input name="task.detail" class="form-control" [(ngModel)]="task.detail" required >
   <button type="submit" >Save</button>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ListService } from '../../service/list/list.service'
+import { ManageService } from '../../service/api/manage.service';
 
 @Component({
   selector: 'app-history',
@@ -8,15 +9,15 @@ import { ListService } from '../../service/list/list.service'
 })
 export class HistoryComponent implements OnInit {
 
-  constructor(private listService: ListService) { }
+  constructor(private listService: ListService,
+    private manageService: ManageService) { }
 
   list: any;
   ngOnInit() {
-    console.log("history!!")
-    this.list = this.listService.getTodoComplete(); 
-    // this.listService.getTodoComplete().subscribe(res => {
-    //   this.list = res;
-    // });
+    this.manageService.getTodoComplete().subscribe(res => {
+      this.list = res;
+      console.log(this.list)
+    });
   }
 
 }

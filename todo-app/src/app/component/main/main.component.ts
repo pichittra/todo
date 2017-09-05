@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ListService } from '../../service/list/list.service'
+import { ManageService } from '../../service/api/manage.service'
 import { RouterModule, Router} from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 
@@ -12,9 +13,10 @@ export class MainComponent implements OnInit {
 
   title = 'Todo';
   newList: string;
-  list: any;
+  list: any=[];
 
   constructor(private listService: ListService,
+    private manageService: ManageService,
     private router: Router) {
     this.newList = '';
   }
@@ -22,22 +24,29 @@ export class MainComponent implements OnInit {
     this.router.navigate(['/history']);
   }
   newItemlistener(data) {
-    this.listService.addTodo(data);
+   this.manageService.addTodo(data).subscribe(res => {
+      this.list.push(res);
+   });
   }
   deleteData(data) {
-    this.listService.deleteTodo(data);
+    this.manageService.deleteTodo(data).subscribe(res => {
+       this.list = this.list.filter(function (item) {
+      return item.id != data.id;
+    })
+   });
   }
   checkData(data) {
-    this.listService.check(data);
-  }
-  newSubTask(data){
-    console.log(data)
+    this.manageService.check(data).subscribe(res => {
+      for (let i = 0; i < this.list.length; i++) {
+        if(this.list[i].id == data.id){
+          this.list[i] = res
+        }
+    }
+   });
   }
   ngOnInit() {
-    this.listService.filterData().subscribe(res => {
+    this.manageService.getTodo().subscribe(res=> {
       this.list = res;
-    });
-
+    })
   }
-
 }
